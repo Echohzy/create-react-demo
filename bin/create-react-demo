@@ -1,34 +1,70 @@
 #!/usr/bin/env node
 
 const program = require('commander');
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
+const validateNpmPackageName = require('validate-npm-package-name');
 
-let projectName;
-
+let demoDirectory;
 
 program
   .version('0.0.1')
-  .usage('<project-dir> [options]')
-  .arguments('<package-dir>')
+  .usage('<demo-directory> [options]')
+  .arguments('<demo-directory>')
   .action(function (name){
-    projectName = name
+    demoDirectory = name
   }).parse(process.argv);
 
 function exists(path){
   return fs.existsSync(path);
 }
 
-function createReactDemo(){
-  const pathName = path.resolve(projectName);
-  if(exists(pathName)){
-    console.log("The project-directory is already existed");
-    process.exit(1);
-  }else{
-    fs.mkdir(pathName, 0777, function (err) {
-      if (err) throw err;
-    });
+function printInfo(messages){
+  if(!messages){
+    return;
   }
+  messages.forEach(function(item){
+    console.error(item);
+    console.log('\n');
+  });
+}
+
+function checkName(projectName){
+  const result = validateNpmPackageName(projectName);
+
+  if(result.validForNewPackages){
+    return true;
+  }
+  printInfo(result.errors);
+  printInfo(result.warnings); 
+  process.exit(1);
+}
+
+function createReactDemo(){
+  const pathName = path.resolve(demoDirectory);
+  const projectName = path.basename(pathName);
+  if(exists(pathName)){
+    console.error("The demo-directory is already existed");
+    process.exit(1);
+  }
+  checkName(projectName);
+  try {
+    fs.mkdirSync(pathName, 0777);
+  } catch (err){
+    console.error(err);
+  }
+  fs.copy('template', pathName)
+  .then(()=>{
+    let packageJson = require('../template/package.json');
+    packageJson = JSON.stringify(Object.assign({}, packageJson, {"name": projectName}));
+    return fs.outputFile(pathName+"/package.json", packageJson);
+  })
+  .then(function(){
+    console.log('success');
+  })
+  .catch(error=>console.error(error));
+
+  console.log("It may take some time ......");
 }
 
 createReactDemo();
