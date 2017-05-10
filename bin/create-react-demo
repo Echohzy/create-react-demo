@@ -1,0 +1,34 @@
+#!/usr/bin/env node
+
+const program = require('commander');
+const fs = require('fs');
+const path = require('path');
+
+let projectName;
+
+
+program
+  .version('0.0.1')
+  .usage('<project-dir> [options]')
+  .arguments('<package-dir>')
+  .action(function (name){
+    projectName = name
+  }).parse(process.argv);
+
+function exists(path){
+  return fs.existsSync(path);
+}
+
+function createReactDemo(){
+  const pathName = path.resolve(projectName);
+  if(exists(pathName)){
+    console.log("The project-directory is already existed");
+    process.exit(1);
+  }else{
+    fs.mkdir(pathName, 0777, function (err) {
+      if (err) throw err;
+    });
+  }
+}
+
+createReactDemo();

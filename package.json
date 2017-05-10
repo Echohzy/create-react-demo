@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "bin": {
-    "pizza": "./bin/pizza"
+    "pizza": "./bin/pizza",
+    "create-react-demo": "./bin/create-react-demo"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
