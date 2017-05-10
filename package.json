@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "bin": {
-    "pizza": "./bin/pizza",
     "create-react-demo": "./bin/create-react-demo"
   },
   "scripts": {
