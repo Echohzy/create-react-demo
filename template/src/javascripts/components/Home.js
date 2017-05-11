@@ -2,13 +2,13 @@
 
 import React , { Component } from 'react';
 
-export default class App extends Component {
+export default class Home extends Component {
   constructor(props){
     super(props);
   }
   render(){
     return (
-      <h1>React Demo</h1>
+      <div>Home</div>
     );
   }
 }
