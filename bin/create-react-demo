@@ -53,6 +53,7 @@ function createReactDemo(){
   } catch (err){
     console.error(err);
   }
+  console.log("Creating files. This might take a couple minutes.");
   fs.copy('template', pathName)
   .then(()=>{
     let packageJson = require('../template/package.json');
@@ -63,8 +64,6 @@ function createReactDemo(){
     console.log('success');
   })
   .catch(error=>console.error(error));
-
-  console.log("It may take some time ......");
 }
 
 createReactDemo();
