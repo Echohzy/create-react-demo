@@ -47,7 +47,7 @@ function createReactDemo(){
   }
   const pathName = path.resolve(demoDirectory);
   const projectName = path.basename(pathName);
-  const templatePath = pathName + '/node_modules/create-react-demo/template/';
+
   if(exists(pathName)){
     console.error("The demo-directory is already existed.");
     process.exit(1);
@@ -59,9 +59,10 @@ function createReactDemo(){
     console.error(err);
   }
   console.log("Creating files. This might take a couple minutes.");
-  fs.copy(templatePath, pathName)
+ 
+  fs.copy(path.resolve(__dirname, '../template'), pathName)
   .then(()=>{
-    let packageJson = require('../template/package.json');
+    let packageJson = require(path.resolve(__dirname, '../template/package.json'));
     packageJson = JSON.stringify(Object.assign({}, packageJson, {"name": projectName}));
     return fs.outputFile(pathName+"/package.json", packageJson);
   })
