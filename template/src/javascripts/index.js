@@ -8,7 +8,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from './components/App.js';
 
-import '../stylesheets/style.css';
+import '../stylesheets/style.less';
 
 ReactDOM.render(
   <Router>
