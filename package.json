@@ -3,13 +3,19 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "description": "A tool for creating react demos",
   "bin": {
     "create-react-demo": "./bin/create-react-demo"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Echohzy/create-react-demo"
+  },
+  "homepage": "https://github.com/Echohzy/create-react-demo",
+  "author": "Canaan",
   "license": "ISC",
   "dependencies": {
     "commander": "^2.9.0",
