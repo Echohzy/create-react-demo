@@ -1,7 +1,7 @@
 {
   "name": "create-react-demo",
-  "version": "1.0.1",
-  "description": "",
+  "version": "1.0.2",
+  "description": "react, demo, build-tools",
   "main": "index.js",
   "description": "A tool for creating react demos",
   "bin": {
