@@ -4,13 +4,18 @@ import React, { Component } from 'react';
 
 import ReactDOM from 'react-dom';
 
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import App from './components/App.js';
+import Home from './components/Home.js';
+
+import About from './components/About.js';
 
 import '../stylesheets/style.less';
 
 ReactDOM.render(
   <Router>
-    <App />
+    <div className="container">
+      <Route exact  path="/" component={Home} />
+      <Route path="/about" component={About} />
+    </div>
   </Router>, document.getElementById('app'));
